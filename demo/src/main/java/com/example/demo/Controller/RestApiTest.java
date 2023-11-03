@@ -41,6 +41,13 @@ public class RestApiTest {
         return "Post : 01";
     }
 
+    /**
+     * url 을 v1 으로 명시해서 사용
+     * @param request
+     * @param regId
+     * @param nameStr
+     * @return
+     */
     @RequestMapping(value = "/v1/post/02", method = {RequestMethod.POST}, produces = {"application/json; charset=utf8", "text/plain"})
     public ResponseEntity<?> PostRestApi02(
             HttpServletRequest request
@@ -59,6 +66,16 @@ public class RestApiTest {
         return new ResponseEntity<>(rtnMap, HttpStatus.OK);
     }
 
+    /**
+     * ResponseBody, @RequestBody 사용하지 않음
+     * HttpServletRequest, {RequestMethod.POST} 사용
+     * url 을 v{version} 으로 받아서 사용
+     * @param request
+     * @param version
+     * @param regId
+     * @param nameStr
+     * @return
+     */
     @RequestMapping(value = "/v{version}/post/04", method = {RequestMethod.POST}, produces = {"application/json; charset=utf8", "text/plain"})
     public ResponseEntity<?> PostRestApi02(
             HttpServletRequest request
@@ -83,6 +100,11 @@ public class RestApiTest {
         return new ResponseEntity<>(rtnMap, HttpStatus.OK);
     }
 
+    /**
+     * ResponseBody, @RequestBody 사용
+     * @param params
+     * @return
+     */
     @PostMapping(value = "/v1/post/03")
     public @ResponseBody ResponseEntity<?> PostRestApi03(@RequestBody Map<String, Object> params) {
         System.out.println("/v1/post/03");
@@ -95,6 +117,13 @@ public class RestApiTest {
         return new ResponseEntity<>(rtnMap, HttpStatus.OK);
     }
 
+    /**
+     * ResponseBody, @RequestBody, @PathVariable 사용
+     * {version} 사용하는 방법
+     * @param params
+     * @param version
+     * @return
+     */
     @PostMapping(value = "/v{version}/post/05")
     public @ResponseBody ResponseEntity<?> PostRestApi05(
             @RequestBody Map<String, Object> params
